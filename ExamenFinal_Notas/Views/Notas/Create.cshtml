@@ -1,0 +1,27 @@
+﻿@{ Layout = null;
+    var nota = (Nota)Model;}
+
+<div class="bg-info">
+    <form id="createNota" onsubmit="guardar(event)" action="#" enctype="multipart/form-data" method="post" class="form-group">
+
+        <div class="form-group">
+            <h1 style="font-size:20px">Titulo</h1>
+            <input type="text" class="input-group-text input-group-sm" name="Tittle"  placeholder="Titulo de nota" />
+        </div>
+        <div class="form-group">
+            <h1 style="font-size:20px">Contenido</h1>
+            <textarea placeholder="Ingrese un contenido para su nota..." class="form-control" id="text" name="Nota_Content" rows="6" cols="50"></textarea>
+        </div>
+        <div class="form-group">
+            <h1 style="font-size:20px">Tags</h1>
+            @foreach (var item in ViewBag.Etiquetas)
+            {
+                <div class="form-check form-check">
+                    <input name="etiqueta" class="form-check-inline" type="checkbox" id="inlineCheckbox1" value="@item.Id">
+                    <label style="font-size:20px" class="form-check-label" for="inlineCheckbox1">@item.Name</label>
+                </div>
+            }
+        </div>
+    </form>
+</div>
+        

@@ -1,0 +1,99 @@
+﻿@{ Layout = null;
+    var nota = (List<Nota>)Model; }
+
+@foreach (var item in nota)
+{
+<div class="container">
+    <div class="col shadow text-black-50"  style=""  >
+
+
+        <ul style="" class="list-unstyled">
+            <li class="nav-item shadow border shadow"  >
+                <div class="text-center shadow border border-secondary text-warning bg-dark shadow" >
+                    <a class="text-center" href="/Notas/Detalle?Id=@item.Id">
+                        <strong class="shadow text col-1 text-center text-warning">@item.Tittle</strong>
+                    </a>
+                </div>
+
+                <div class="container" style="margin-left:auto" >
+                    <span>
+                        <strong class="text-info bg-dark" style="margin-right:20px">Contenido: </strong>
+                        @if (item.Nota_Content.Length > 50)
+                        {
+                <parcial  >- @item.Nota_Content.Substring(0, 50) ...</parcial> }
+            else
+            {
+                <parcial>- @item.Nota_Content</parcial>}
+                    </span>
+                </div>
+                <br />
+                <div align="center">
+                    <button id="editModal" style="margin-right:20px;" class="btn btn-warning bg bg-transparent " href="#" data-toggle="modal" data-target="#edit" onclick="selCuenta('@item.Id', '@item.Tittle', '@item.Nota_Content')">Editar</button>
+                    <a href="/Notas/Eliminar?id=@item.Id" style="margin-left:20px;" class="btn btn-success ">Eliminar</a>
+
+                </div>
+            </li>
+        </ul>
+        <br />
+    </div>
+</div>
+}
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info" >
+                <h5 class="modal-title" id="exampleModalLabel">Editar Nota</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="EditarN">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-warning" onclick="submitForm()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    function selCuenta(id, titulo, cuerpo) {
+        console.log(id + titulo + cuerpo);
+        $('#mtxtId').val(id);
+        $('#mtxtTitulo').val(titulo);
+        $('#mtxtCuerpo').val(cuerpo);
+    };
+
+    $.ajax({
+        url: '/Notas/Edit',
+        type: 'get'
+    }).done(function (html) {
+        $('#EditarN').html(html);
+    })
+
+    function submitForm() {
+        $('#Edit').submit();
+    }
+
+    function editar(event) {
+        event.preventDefault();
+        var dataString = new FormData($('#edit form')[0]);
+        $.ajax({
+            url: "/Notas/Edit",
+            type: "post",
+            processData: false,  // Important!
+            contentType: false,
+            cache: false,
+            data: dataString
+        }).done(function (html) {
+            location.reload();
+        }).fail(function (html) {
+            $('#EditarN').html(html.responseText);
+        });
+    }
+</script>

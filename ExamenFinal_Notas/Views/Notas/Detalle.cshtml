@@ -1,0 +1,26 @@
+﻿@{ var nota = (Nota)Model;
+    var users = ((List<User>)ViewBag.Users);}<div class="card">    <h3 class="card-header text-center text-warning bg-dark">@nota.Tittle</h3>    <div class="card-body">        <span>            <strong class="text-body">Contenido: </strong>            <span>                @nota.Nota_Content            </span>        </span>        <br />        <br />        <span><strong>Etiquetas: </strong></span>        <ul>            @foreach (var etiqueta in ViewBag.Etiquetas)
+            {
+                if (etiqueta.NotaId == nota.Id)
+                {    <li>        <span>            @etiqueta.Etiqueta.Name        </span>    </li>}
+            }        </ul>        <br />        <span class="font-"><strong> Último Cambio: </strong>@nota.DateRegister</span>        <br />        <br />        <span class="font-"><strong> Compartir con </strong></span>        
+        <form action="/Notas/Compartir2" method="post">
+            <input type="hidden" name="notaId" value="@nota.Id" />
+            <select name="usuario" class="form-control-file text-center">
+                <option value="">----Usuario----</option>
+                @foreach (var item in users)
+                {
+                    <option value="@item.Id ">@item.Username</option>
+
+                }
+
+            </select>
+            <div class="form-group mx-sm-4 pb-1">
+                <input type="submit" class="btn-dark" value="Compartir" />
+            </div>
+        </form>
+                
+
+                
+            
+           </div></div>

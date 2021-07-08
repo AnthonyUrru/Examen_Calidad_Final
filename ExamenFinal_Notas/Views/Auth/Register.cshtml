@@ -1,0 +1,32 @@
+﻿
+@{ ViewData["Title"] = "INGRESAR"; }
+@{ Layout = null; }
+<head>
+
+    <title>INGRESAR</title>
+</head>
+
+
+<body style="        background-image: url(https://miracomosehace.com/wp-content/uploads/2020/08/block-notas.jpg);
+        background-size: cover;">
+    <div class="container">
+        <form action="/auth/Register" method="post" class="form-register">
+            <a>Ingrese sus datos</a>
+            <div class="text-center">
+
+                <div class="container" style="margin-left: 40%; margin-top:15%">
+
+                    <span style="color:red;font-weight:bold;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">INGRESE SU USARIO:  <input class="text-body" type="text" name="username" placeholder="Usuario" value="@ViewBag.username" /></span>
+                    <br />
+                    <span style="color:red;font-weight:bold;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">INGRESE SU CONTRASEÑA:  <input class="controls" type="password" name="contraseña" placeholder="Contraseña" value="@ViewBag.passwd" /></span>
+                </div>
+                <div class="text-center" style="text-align:center">
+                    <button class="botons row" type="submit" style="margin-bottom:-2px; margin-top:8px;border-radius:15px; width:150px;">Aceptar</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</body>
+
+
